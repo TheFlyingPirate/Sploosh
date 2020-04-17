@@ -1,0 +1,10 @@
+C:\Users\FlyFS\RiderProjects\SplooshTest\Sploosh\bin\Debug\Sploosh.exe.config
+C:\Users\FlyFS\RiderProjects\SplooshTest\Sploosh\bin\Debug\Sploosh.exe
+C:\Users\FlyFS\RiderProjects\SplooshTest\Sploosh\bin\Debug\Sploosh.pdb
+C:\Users\FlyFS\RiderProjects\SplooshTest\Sploosh\obj\Debug\Sploosh.csprojAssemblyReference.cache
+C:\Users\FlyFS\RiderProjects\SplooshTest\Sploosh\obj\Debug\Sploosh.Properties.Resources.resources
+C:\Users\FlyFS\RiderProjects\SplooshTest\Sploosh\obj\Debug\Sploosh.csproj.GenerateResource.cache
+C:\Users\FlyFS\RiderProjects\SplooshTest\Sploosh\obj\Debug\Sploosh.csproj.CoreCompileInputs.cache
+C:\Users\FlyFS\RiderProjects\SplooshTest\Sploosh\obj\Debug\Sploosh.exe
+C:\Users\FlyFS\RiderProjects\SplooshTest\Sploosh\obj\Debug\Sploosh.pdb
+C:\Users\FlyFS\RiderProjects\SplooshTest\Sploosh\obj\Debug\Sploosh.Form1.resources
