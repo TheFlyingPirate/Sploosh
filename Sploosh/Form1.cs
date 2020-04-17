@@ -14,6 +14,15 @@ namespace Sploosh
     {
         int runs = 0;
         Button[,] btnList = new Button[8,8] {{null,null,null,null,null,null,null,null},{null,null,null,null,null,null,null,null},{null,null,null,null,null,null,null,null},{null,null,null,null,null,null,null,null},{null,null,null,null,null,null,null,null},{null,null,null,null,null,null,null,null},{null,null,null,null,null,null,null,null},{null,null,null,null,null,null,null,null}};
+        static Random rdm = new Random();
+        Boolean[,] field = new Boolean[8, 8] { {false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false} };
+        int[,] heatmap = new int[8 , 8] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0}};
+        double highest = 0;
+        double total = 0;
+        int amount = 10000;
+        int conditionMet = 0;
+        
+        //UI Creation
         public Form1()
         {
             int start = 12;
@@ -39,19 +48,13 @@ namespace Sploosh
                     btnList[i2, i] = btnNew;
                 }
             }
-        } static Random rdm = new Random();
-        Boolean[,] field = new Boolean[8, 8] { {false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false},{false,false,false,false,false,false,false,false} };
-        int[,] heatmap = new int[8 , 8] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0}};
-        double highest = 0;
-       double total = 0;
-        
-        
-        int amount = 10000;
-        int conditionMet = 0;
+        }
+ 
 
         
          void simulation()
          {
+             //resets Values
              runs = 0;
              total = 0;
              highest = 0;
@@ -59,6 +62,7 @@ namespace Sploosh
              conditionMet = 0;
              heatmap = new int[8 , 8] {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0}};
 
+             //Runs until enough situations with the current specifcations are found
             while(conditionMet<amount)
             {
                 field = new Boolean[8, 8]
@@ -87,14 +91,13 @@ namespace Sploosh
                 }
                 Console.WriteLine(conditionMet.ToString());
             }
+            
+            //Go through each value in the heatmap to calculate a total
             for (int i = 0; i < 8; i++)
             {
                 for (int i2 = 0; i2 < 8; i2++)
                 {
                     total += heatmap[i, i2];
- 
-
-
                 }
             }
 
@@ -126,7 +129,8 @@ namespace Sploosh
                 }
             }
         }
-        Boolean conditions()
+       //reads out all the buttons to get whether an enemy has been selected or not
+      Boolean conditions()
         {
           
             for (int i = 0; i < 8; i++)
@@ -147,15 +151,12 @@ namespace Sploosh
                     }
 
                 }   
-            }   
-        
-                conditionMet++;
-                return true;
-            
-            
-            
+            }
+            conditionMet++;
+            return true;
         }
-        void addEnemy(int length)
+      //add squid with given length
+      void addEnemy(int length)
         {
             int[] pos = new int[]{0,0};
            
@@ -278,7 +279,8 @@ namespace Sploosh
             }
         }
 
-        void addToHeatMap()
+      //add a vvalues to heatmap
+      void addToHeatMap()
         {
             for (int i = 0; i < 8; i++)
             {
@@ -298,7 +300,8 @@ namespace Sploosh
 
         }
 
-        void drawUI()
+      //draw Button Colors as well as total percentage
+      void drawUI()
         {
             highest = highest/Convert.ToDouble(conditionMet) ;
             double average = total/Convert.ToDouble(conditionMet  * 64);
@@ -336,7 +339,8 @@ namespace Sploosh
         }
         
         
-        private void Buttons_Click(object sender, MouseEventArgs e)
+        //register clicks for buttons RightClick=Squid; LeftClick=Miss
+      private void Buttons_Click(object sender, MouseEventArgs e)
         {
             if(e.Button==MouseButtons.Left){
                 Button clickedButton = (Button) sender;
@@ -355,15 +359,9 @@ namespace Sploosh
 
             simulation();
         }
-        private void Buttons_RightClick(object sender, EventArgs e)
-        {
-            Button clickedButton = (Button) sender;
-            clickedButton.Text = "O";
-            clickedButton.Tag = 2;
-
-            simulation();
-        }
-        private void Buttons_Mouse(object sender, EventArgs e)
+       
+      //Get percentage from position and display it in bottom left lable
+      private void Buttons_Mouse(object sender, EventArgs e)
         {
             Button clickedButton = (Button) sender;
             int x = Convert.ToInt32(clickedButton.Name.Split(';')[0]);
